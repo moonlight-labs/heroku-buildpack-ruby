@@ -33,8 +33,8 @@ fi
 [ -f "$BUILD_DIR/package-lock.json" ] && NPM_LOCK=true || NPM_LOCK=false
 npm_engine=$(read_json "$BUILD_DIR/package.json" ".engines.npm")
 
-meta_set "build-step" "install-npm"
-monitor "install-npm-binary" install_npm "$npm_engine" "$BUILD_DIR/.heroku/node" $NPM_LOCK
-
+# meta_set "build-step" "install-npm"
+# monitor "install-npm-binary" install_npm "$npm_engine" "$BUILD_DIR/.heroku/node" $NPM_LOCK
+install_npm "$npm_engine" "$BUILD_DIR/.heroku/node" $NPM_LOCK
 
 $heroku_buildpack_ruby_dir/bin/ruby $BIN_DIR/support/ruby_compile $@
