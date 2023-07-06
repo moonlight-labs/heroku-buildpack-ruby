@@ -11,7 +11,7 @@ BUILDPACK_DIR=$(dirname $BIN_DIR)
 source "$BIN_DIR/support/bash_functions.sh"
 heroku_buildpack_ruby_install_ruby "$BIN_DIR" "$BUILDPACK_DIR"
 
-source "$heroku_buildpack_ruby_dir/lib/binaries.sh"
+source "$BIN_DIR/../lib/binaries.sh"
 
 if detect_needs_java "$BUILD_DIR"; then
   cat <<EOM
