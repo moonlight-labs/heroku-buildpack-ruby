@@ -28,4 +28,11 @@ EOM
   compile_buildpack_v2 "$BUILD_DIR" "$CACHE_DIR" "$ENV_DIR" "https://buildpack-registry.s3.us-east-1.amazonaws.com/buildpacks/heroku/jvm.tgz" "heroku/jvm"
 fi
 
+[ -f "$BUILD_DIR/package-lock.json" ] && NPM_LOCK=true || NPM_LOCK=false
+npm_engine=$(read_json "$BUILD_DIR/package.json" ".engines.npm")
+
+meta_set "build-step" "install-npm"
+monitor "install-npm-binary" install_npm "$npm_engine" "$BUILD_DIR/.heroku/node" $NPM_LOCK
+
+
 $heroku_buildpack_ruby_dir/bin/ruby $BIN_DIR/support/ruby_compile $@
